@@ -1,9 +1,9 @@
-var express = require('express');
-var path = require('path');
-var bodyParser = require('body-parser')
-var mongoose = require('mongoose');
-var Student = require("./models/student")
-var app = express();
+const express = require('express');
+const path = require('path');
+const bodyParser = require('body-parser');
+const connectDb = require("./src/connection");
+const Student = require("./models/student");
+const app = express();
 
 // Connect to mongodb
 mongoose.connect()
@@ -15,10 +15,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Parse JSON bodies (as sent by API clients)
 app.use(express.json());
 
-var book = {isbn: 1234, bname: "OS", edition: 8, author: "Padma Reddy"};
-var student = [{regno: "13P1", sname: "Nuthan", branch: "CS", sem: 5, contact: 9066670290, address:"Kanakanagara, Hoskote"}];
-var stu_book = [];
-
 app.set('view engine', 'ejs');
 
 app.get('/',function(req,res){
@@ -26,7 +22,7 @@ app.get('/',function(req,res){
 });
 
 app.post('/',function(req,res){
-    var stu_obj = {sname: req.body.s.name, bname: req.body.s.book,
+    const stu_obj = {sname: req.body.s.name, bname: req.body.s.book,
       issue_date: req.body.s.issue_date, return_date: req.body.s.return_date };
 
     Student.create(stu_obj,function(err,new_stud){
