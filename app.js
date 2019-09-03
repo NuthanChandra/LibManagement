@@ -1,12 +1,15 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-const connectDb = require("./src/connection");
+const mongoose = require('mongoose');
+// const connectDb = require("./src/connection");
+// mongoose.connect("mongodb://mongo:27017");
 const Student = require("./models/student");
 const app = express();
 
 // Connect to mongodb
-mongoose.connect()
+mongoose.connect('mongodb://mongo:27017/express_test',{ useNewUrlParser: true})
+.then(() => console.log('MongoDB connected')).catch(err => console.log(err));
 
 app.use(express.static(__dirname + '/public'));
 // Parse URL-encoded bodies (as sent by HTML forms)

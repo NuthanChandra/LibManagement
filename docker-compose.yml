@@ -3,11 +3,13 @@ services:
   app:
     build: .
     ports:
-      - '8000:8000'
+      - "8000:8000"
     volumes:
       - /app/node_modules
       - ./:/app
+    depends_on:
+      - mongo
   mongo:
     image: mongo
     ports:
-      — '27017:27017'
+      - "27017:27017"
