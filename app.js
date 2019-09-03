@@ -25,9 +25,9 @@ app.get('/',function(req,res){
 });
 
 app.post('/',function(req,res){
-    const stu_obj = {sname: req.body.s.name, bname: req.body.s.book,
-      issue_date: req.body.s.issue_date, return_date: req.body.s.return_date };
-
+    const stu_obj = {studentName: req.body.s.name, bookName: req.body.s.book,
+      issueDate: req.body.s.issue_date, returnDate: req.body.s.return_date };
+    console.log("Student obj name is "+ stu_obj.sname);
     Student.create(stu_obj,function(err,new_stud){
       if(err || !new_stud){
         console.log("Error in writing to database");
@@ -37,8 +37,7 @@ app.post('/',function(req,res){
         console.log(new_stud);
       }
     })
-    stu_book.push(stu_obj);
-    console.log(stu_book);
+
     res.redirect("/");
 });
 
